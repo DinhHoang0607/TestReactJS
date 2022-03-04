@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import ChildComponent from "./ChildComponent";
+
+const MyComponent = () => {
+  
+//   const [arr, setArr] = useState([]);
+  const arr = [
+    { id: "1", title: "game", cost: "5$" },
+    { id: "2", title: "gamex", cost: "6$" },
+    { id: "3", title: "gamexx", cost: "7$" },
+  ];
+  // constructor(props) {
+  //     super(props)
+  // }
+  //   const handleChangeName = (event) => {
+  //     setName(event.target.value);
+  //   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("click me");
+  };
+  return (
+    <div>
+      <form>
+        <label htmlFor="fname">First name:</label>
+        <br />
+        <input
+          type="text"
+          value={fname}
+          onChange={(e) => setfName(e.target.value)}
+        />
+        <br />
+        <label htmlFor="lname">Last name:</label>
+        <br />
+        <input
+          type="text"
+          value={lname}
+          onChange={(e) => setlName(e.target.value)}
+        />
+        <br />
+        <input type="submit" value="Submit" onClick={(e) => handleSubmit(e)} />
+      </form>
+      <ChildComponent arr={arr} />
+    </div>
+  );
+};
+
+export default MyComponent;

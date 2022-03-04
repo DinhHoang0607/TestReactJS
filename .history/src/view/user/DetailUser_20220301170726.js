@@ -1,0 +1,42 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+const DetailUser = () => {
+  //   let id = useParams().id;
+  const { id } = useParams();
+  const [user, setUser] = useState({});
+  const isEmptyObj = (temp) => {
+    return Object.keys(temp).length === 0;
+  };
+  useEffect(() => {
+    // console.log(id);
+    axios.get(`https://reqres.in/api/users/${id}`).then((res) => {
+      //   console.log(res);
+      setUser(res && res.data && res.data.data ? res.data.data : {});
+    });
+  });
+  const navigate = useNavigate();
+  const handleBackListUsers = () => {
+    navigate("/users");
+    console.log(navigate);
+  };
+  return (
+    <>
+      <div>DetailUser{useParams().id}</div>
+      {isEmptyObj(user) === false && (
+        <>
+          <div>
+            User's name: {user.first_name} {user.last_name}
+          </div>
+          <div>User's email: {user.email}</div>
+          <img src={user.avatar} alt="" />
+          <button type="button" onClick={() => handleBackListUsers()}>
+            Back
+          </button>
+        </>
+      )}
+    </>
+  );
+};
+
+export default DetailUser;
